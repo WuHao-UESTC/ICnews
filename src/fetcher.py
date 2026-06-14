@@ -5,6 +5,7 @@
 
 import hashlib
 import logging
+import random
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass, field
@@ -62,6 +63,8 @@ def _resolve_url(url: str) -> str:
 
 def fetch_rss(source: dict, since: datetime) -> List[Article]:
     """抓取单个 RSS 源，返回 since 之后的 Article 列表。"""
+    # 随机延迟 1-3 秒，避免并发请求同时到达触发限流
+    time.sleep(random.uniform(1.0, 3.0))
     url = _resolve_url(source["url"])
     if not url:
         logger.warning(f"[{source['id']}] 未配置 URL，跳过")

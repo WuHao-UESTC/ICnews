@@ -12,7 +12,10 @@
       "WebFetch(domain:news.synopsys.com)",
       "WebFetch(domain:www.asml.com)",
       "WebFetch(domain:community.arm.com)",
-      "WebFetch(domain:www.tel.com)"
+      "WebFetch(domain:www.tel.com)",
+      "Read(//mnt/c/Users/MECHREVO/AppData/Local/Temp/**)",
+      "Read(//c/Users/MECHREVO/AppData/Local/Temp/claude/**)",
+      "Read(//c/Users/MECHREVO/AppData/Local/Temp/claude//**)"
     ]
   }
 }
