@@ -1,7 +1,6 @@
 __pycache__/
 *.pyc
 .env
-.github/cache/processed_urls.json
 *.egg-info/
 dist/
 build/

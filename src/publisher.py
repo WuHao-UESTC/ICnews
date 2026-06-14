@@ -164,6 +164,7 @@ def _build_article_blocks(art: dict, blocks: list) -> None:
     source = art.get("source", "")
     date = art.get("date", "")
     summary = art.get("summary_cn", "")
+    trend = art.get("trend_analysis", "")
     importance = art.get("importance", "medium")
 
     imp_map = {"high": "★ 重要", "medium": "●", "low": "○"}
@@ -189,6 +190,10 @@ def _build_article_blocks(art: dict, blocks: list) -> None:
         except Exception:
             meta += f"  |  {date}"
     blocks.append(_paragraph(meta, color="gray"))
+
+    # 趋势分析
+    if trend:
+        blocks.append(_paragraph(f"趋势：{trend}", color="brown"))
 
     # 摘要
     if summary:
