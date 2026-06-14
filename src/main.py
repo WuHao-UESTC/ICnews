@@ -17,7 +17,7 @@ env_path = Path(__file__).resolve().parent.parent / ".env"
 if env_path.exists():
     load_dotenv(env_path)
 
-from .fetcher import fetch_all_sources, manual_fetch_test
+from .fetcher import enrich_articles_content, fetch_all_sources, manual_fetch_test
 from .processor import deduplicate, filter_low_importance, generate_report
 from .publisher import publish_report
 from .utils import (
@@ -76,6 +76,9 @@ def run_full_pipeline(
     if not articles:
         logger.warning("没有抓到任何文章，退出")
         return None
+
+    # 对 RSS 内容不足的文章抓取全文，提升 LLM 分析质量
+    articles = enrich_articles_content(articles)
 
     # 3. 过滤已处理的
     if skip_processed:

@@ -219,3 +219,89 @@ def manual_fetch_test(source_id: str) -> List[Article]:
     since = datetime.now(timezone.utc) - timedelta(days=365)
     fetcher = fetch_api if src.get("type") == "api" else fetch_rss
     return fetcher(src, since)
+
+
+def enrich_articles_content(articles: List[Article],
+                            min_rss_chars: int = 800,
+                            max_workers: int = 4) -> List[Article]:
+    """对 RSS 内容不足的文章，通过 trafilatura 抓取全文。
+
+    RSS 通常只提供摘要/导语（200-500 字），不足以支撑 LLM 深度分析。
+    此函数对 content 较短的条目逐一下载原文 URL 并提取正文。
+
+    Args:
+        articles: 文章列表
+        min_rss_chars: RSS content 低于此值（字符数）的文章需要补全
+        max_workers: 并行下载线程数
+
+    Returns:
+        原列表（原地修改了 article.content），方便链式调用
+    """
+    import trafilatura
+
+    # 筛选出需要补全的文章
+    needy = [(i, a) for i, a in enumerate(articles)
+             if len(a.content) < min_rss_chars]
+
+    if not needy:
+        logger.info("所有文章 RSS 内容充足，跳过全文提取")
+        return articles
+
+    logger.info(
+        f"全文提取: {len(needy)}/{len(articles)} 篇文章需要补全 "
+        f"(RSS 内容 < {min_rss_chars} 字符)"
+    )
+
+    enriched = 0
+    failed = 0
+
+    def _extract_one(idx: int, art: Article) -> tuple:
+        time.sleep(random.uniform(0.5, 2.0))
+        try:
+            resp = requests.get(
+                art.url,
+                timeout=FETCH_TIMEOUT,
+                headers={"User-Agent": USER_AGENT},
+            )
+            if resp.status_code >= 400:
+                return idx, None, f"HTTP {resp.status_code}"
+            if not resp.text or len(resp.text) < 500:
+                return idx, None, "响应内容过短"
+
+            text = trafilatura.extract(
+                resp.text,
+                include_formatting=False,
+                include_links=False,
+                include_images=False,
+            )
+            if not text or len(text) < 100:
+                return idx, None, f"提取内容过短 ({len(text or '')} 字符)"
+
+            return idx, text, None
+        except Exception as exc:
+            return idx, None, str(exc)[:120]
+
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        futures = {
+            executor.submit(_extract_one, i, a): i
+            for i, a in needy
+        }
+        for future in as_completed(futures):
+            idx, text, error = future.result()
+            art = articles[idx]
+            if text:
+                old_len = len(art.content)
+                art.content = text
+                enriched += 1
+                logger.debug(
+                    f"[{art.source_id}] {art.title[:60]}... "
+                    f"全文提取成功 ({old_len} → {len(text)} 字符)"
+                )
+            else:
+                failed += 1
+                logger.debug(
+                    f"[{art.source_id}] {art.title[:60]}... 全文提取失败: {error}"
+                )
+
+    logger.info(f"全文提取完成: 成功 {enriched}, 失败 {failed}")
+    return articles
