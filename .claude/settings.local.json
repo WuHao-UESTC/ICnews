@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python -m py_compile src/fetcher.py)",
+      "Bash(python -m py_compile src/processor.py)",
+      "Bash(python -m py_compile src/publisher.py)",
+      "Bash(python -m py_compile src/utils.py)",
+      "Bash(python -m py_compile src/main.py)",
+      "Bash(pip install *)",
+      "Bash(python *)",
+      "WebSearch",
+      "WebFetch(domain:news.synopsys.com)",
+      "WebFetch(domain:www.asml.com)",
+      "WebFetch(domain:community.arm.com)",
+      "WebFetch(domain:www.tel.com)"
+    ]
+  }
+}

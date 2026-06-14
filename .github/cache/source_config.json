@@ -1,0 +1,444 @@
+{
+  "description": "半导体行业新闻源配置。enabled 设为 false 可临时禁用某个源。note 字段说明该源的状态。",
+  "sources": [
+    {
+      "id": "tsmc",
+      "name": "TSMC Newsroom",
+      "url": "https://pr.tsmc.com/english/rss.xml",
+      "category": "manufacturing",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地 Windows 测试 XML 格式报错，GH Actions (美国 IP) 大概率可用"
+    },
+    {
+      "id": "intel",
+      "name": "Intel Newsroom",
+      "url": "https://newsroom.intel.com/feed/",
+      "category": "manufacturing",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地验证通过 (10 条)"
+    },
+    {
+      "id": "samsung_semi",
+      "name": "Samsung Semiconductor",
+      "url": "https://news.samsungsemiconductor.com/global/feed/",
+      "category": "manufacturing",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "已更正为三星半导体独立新闻站 news.samsungsemiconductor.com，替代原 samsung.com 分类页"
+    },
+    {
+      "id": "asml",
+      "name": "ASML Press",
+      "url": "https://www.asml.com/en/news/rss",
+      "category": "equipment",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地返回 text/html 而非 XML，GH Actions 上大概率正常。备选：GlobeNewswire ASML 频道"
+    },
+    {
+      "id": "applied_materials",
+      "name": "Applied Materials",
+      "url": "https://investor.appliedmaterials.com/rss-feeds",
+      "category": "equipment",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "已更正为 Investor 站 RSS。原 blog.rss URL 已失效"
+    },
+    {
+      "id": "sk_hynix",
+      "name": "SK Hynix News",
+      "url": "https://news.skhynix.com/feed/",
+      "category": "memory",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地验证通过 (9 条)"
+    },
+    {
+      "id": "lam_research",
+      "name": "Lam Research News",
+      "url": "https://newsroom.lamresearch.com/rss",
+      "category": "equipment",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地 XML 格式报错，GH Actions 大概率可用。备选 investor.lamresearch.com"
+    },
+    {
+      "id": "tokyo_electron",
+      "name": "Tokyo Electron News",
+      "url": "https://www.tel.com/rss/english/news.xml",
+      "category": "equipment",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地 XML 格式报错，GH Actions 大概率可用"
+    },
+    {
+      "id": "ti",
+      "name": "Texas Instruments Newsroom",
+      "url": "https://news.ti.com/rss/press-releases",
+      "category": "analog",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地返回 HTML 非 XML。TI 可能已取消 RSS，建议 GH Actions 验证后决定去留"
+    },
+    {
+      "id": "adi",
+      "name": "Analog Devices News",
+      "url": "https://investor.analog.com/press-releases/",
+      "category": "analog",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "已更正为 Investor 站。原 URL 本地连接超时 (墙)。ADI 可能有 RSS 但未公开，建议 GH Actions 验证"
+    },
+    {
+      "id": "skyworks",
+      "name": "Skyworks Press",
+      "url": "https://investors.skyworksinc.com/press-releases",
+      "category": "rf",
+      "language": "en",
+      "type": "rss",
+      "enabled": false,
+      "note": "Skyworks 与 Qorvo 于 2025.10 宣布合并 ($22B)。RSS 待合并完成后重新确认。当前 Investor 页可能无 RSS"
+    },
+    {
+      "id": "qorvo",
+      "name": "Qorvo Press",
+      "url": "https://ir.qorvo.com/news-releases",
+      "category": "rf",
+      "language": "en",
+      "type": "rss",
+      "enabled": false,
+      "note": "Skyworks 与 Qorvo 正合并中，2027 年完成前保持禁用"
+    },
+    {
+      "id": "stmicro",
+      "name": "STMicroelectronics News",
+      "url": "https://newsroom.st.com/rss.xml",
+      "category": "analog",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地 XML 格式报错，GH Actions 大概率可用"
+    },
+    {
+      "id": "infineon",
+      "name": "Infineon Press",
+      "url": "https://www.infineon.com/cms/en/about-infineon/press/rss/",
+      "category": "analog",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地 XML 格式报错 (墙致响应截断)，GH Actions 大概率可用"
+    },
+    {
+      "id": "nxp",
+      "name": "NXP Blog",
+      "url": "https://media.nxp.com/news-releases/",
+      "category": "rf",
+      "language": "en",
+      "type": "rss",
+      "enabled": false,
+      "note": "NXP 未提供公开 RSS。media.nxp.com 为新闻中心。建议 GH Actions 验证后决定是否改为网页抓取"
+    },
+    {
+      "id": "semianalysis",
+      "name": "SemiAnalysis",
+      "url": "https://www.semianalysis.com/feed/",
+      "category": "digital",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地验证通过 (10 条)。部分文章需付费订阅才能看全文，但 RSS 标题+摘要免费"
+    },
+    {
+      "id": "chips_and_cheese",
+      "name": "Chips and Cheese",
+      "url": "https://chipsandcheese.com/feed/",
+      "category": "digital",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地验证通过 (20 条)"
+    },
+    {
+      "id": "wikichip",
+      "name": "WikiChip",
+      "url": "https://fuse.wikichip.org/feed/",
+      "category": "digital",
+      "language": "en",
+      "type": "rss",
+      "enabled": false,
+      "note": "fuse.wikichip.org 连接被拒绝，站点可能已下线。待确认后删除或替换"
+    },
+    {
+      "id": "servethehome",
+      "name": "ServeTheHome",
+      "url": "https://www.servethehome.com/feed/",
+      "category": "digital",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地验证通过 (6 条)"
+    },
+    {
+      "id": "arm_blog",
+      "name": "ARM Community Blog",
+      "url": "https://community.arm.com/arm-community-blogs/b/rss",
+      "category": "digital",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "已更正为 community.arm.com 博客 RSS。原 JiveServlet URL 已失效"
+    },
+    {
+      "id": "riscv",
+      "name": "RISC-V International Blog",
+      "url": "https://riscv.org/feed/",
+      "category": "digital",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地验证通过 (10 条)"
+    },
+    {
+      "id": "cadence",
+      "name": "Cadence Blog",
+      "url": "https://community.cadence.com/cadence_blogs_8/b/rss",
+      "category": "eda",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "已更正为 cadence.com 社区 RSS。原 URL 格式与社区 RSS 标准不符"
+    },
+    {
+      "id": "synopsys",
+      "name": "Synopsys Newsroom",
+      "url": "https://news.synopsys.com/index.php?rsspage=20295&s=20324",
+      "category": "eda",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "已更正为 news.synopsys.com 新闻中心 RSS。原 synopsys.com/blogs.html 已失效"
+    },
+    {
+      "id": "digitimes",
+      "name": "DigiTimes",
+      "url": "https://www.digitimes.com/rss/dailynews.xml",
+      "category": "supply_chain",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地返回空（可能被屏蔽），GH Actions 大概率可用。DigiTimes 为付费网站，RSS 可能仅含标题"
+    },
+    {
+      "id": "semiengineering",
+      "name": "SemiEngineering",
+      "url": "https://semiengineering.com/feed/",
+      "category": "industry",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地验证通过 (10 条)"
+    },
+    {
+      "id": "ieee_spectrum",
+      "name": "IEEE Spectrum (Semiconductors)",
+      "url": "https://spectrum.ieee.org/feeds/topic/semiconductors.rss",
+      "category": "industry",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地验证通过 (30 条)"
+    },
+    {
+      "id": "anandtech",
+      "name": "AnandTech",
+      "url": "",
+      "category": "digital",
+      "language": "en",
+      "type": "rss",
+      "enabled": false,
+      "note": "已永久停刊 (2024.08.30)。文章存档于 2025.08 被删除。Tom's Hardware 为其官方继任者"
+    },
+    {
+      "id": "toms_hardware",
+      "name": "Tom's Hardware",
+      "url": "https://www.tomshardware.com/feeds/all",
+      "category": "digital",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地验证通过 (50 条)。AnandTech 继任者"
+    },
+    {
+      "id": "ee_times",
+      "name": "EE Times",
+      "url": "https://www.eetimes.com/feed/",
+      "category": "industry",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地验证通过 (10 条)"
+    },
+    {
+      "id": "nvidia",
+      "name": "NVIDIA Blog",
+      "url": "https://blogs.nvidia.com/feed/",
+      "category": "digital",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地验证通过 (18 条)"
+    },
+    {
+      "id": "microwave_journal",
+      "name": "Microwave Journal",
+      "url": "https://www.microwavejournal.com/rss",
+      "category": "rf",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地 XML 格式报错，GH Actions 大概率可用"
+    },
+    {
+      "id": "planet_analog",
+      "name": "Planet Analog",
+      "url": "https://www.planetanalog.com/feed/",
+      "category": "analog",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地验证通过 (10 条)"
+    },
+    {
+      "id": "edn",
+      "name": "EDN",
+      "url": "https://www.edn.com/feed/",
+      "category": "analog",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地验证通过 (10 条)"
+    },
+    {
+      "id": "signal_integrity",
+      "name": "Signal Integrity Journal",
+      "url": "https://www.signalintegrityjournal.com/rss",
+      "category": "analog",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地 XML 格式报错，GH Actions 大概率可用。由 Microwave Journal 团队运营"
+    },
+    {
+      "id": "everything_rf",
+      "name": "Everything RF",
+      "url": "https://www.everythingrf.com/rss-feeds",
+      "category": "rf",
+      "language": "en",
+      "type": "rss",
+      "enabled": true,
+      "note": "本地 XML 格式报错，GH Actions 大概率可用"
+    },
+    {
+      "id": "semiconductor_industry_observer",
+      "name": "半导体行业观察",
+      "url": "https://semiinsights.blog.caixin.com/feed",
+      "category": "industry",
+      "language": "zh",
+      "type": "rss",
+      "enabled": false,
+      "note": "域名 semiinsights.com 不存在。实际为财新博客 semiinsights.blog.caixin.com，需验证 RSS。建议 GH Actions 测试后启用"
+    },
+    {
+      "id": "jiweinet",
+      "name": "集微网",
+      "url": "https://laoyaoba.com/web/",
+      "category": "industry",
+      "language": "zh",
+      "type": "rss",
+      "enabled": false,
+      "note": "域名 jiwei.net 不存在。实际为 laoyaoba.com 或 ijiwei.com。暂无已知 RSS，需手动搜寻"
+    },
+    {
+      "id": "askchip_voice",
+      "name": "问芯 Voice",
+      "url": "",
+      "category": "manufacturing",
+      "language": "zh",
+      "type": "rss",
+      "enabled": false,
+      "note": "微信公众号为主，无公开 RSS。建议后续通过公众号抓取工具接入"
+    },
+    {
+      "id": "chip_thing",
+      "name": "芯东西",
+      "url": "",
+      "category": "industry",
+      "language": "zh",
+      "type": "rss",
+      "enabled": false,
+      "note": "chipthings.com 域名无法访问。需要确认真实域名"
+    },
+    {
+      "id": "eetop",
+      "name": "EETOP 创芯网",
+      "url": "https://www.eetop.cn/",
+      "category": "digital",
+      "language": "zh",
+      "type": "rss",
+      "enabled": false,
+      "note": "eetop.cn/rss 返回 HTML 页面而非 RSS。可能需 /rss.xml 或其他路径。建议手动在网站查找 RSS 链接"
+    },
+    {
+      "id": "arxiv_csET",
+      "name": "arXiv (cs.AR/cs.ET/cond-mat/physics.app-ph)",
+      "url": "http://export.arxiv.org/api/query?search_query=(cat:cs.AR+OR+cat:cs.ET+OR+cat:cond-mat.mes-hall+OR+cat:physics.app-ph)+AND+all:semiconductor+AND+all:chip&sortBy=submittedDate&sortOrder=descending&max_results=30",
+      "category": "academic",
+      "language": "en",
+      "type": "api",
+      "enabled": true,
+      "note": "本地验证通过。免费开放 API，无需密钥"
+    },
+    {
+      "id": "ieee_xplore",
+      "name": "IEEE Xplore (recent papers)",
+      "url": "https://ieeexploreapi.ieee.org/api/v1/search/articles?querytext=semiconductor+OR+integrated+circuit+OR+microprocessor+OR+RFIC+OR+analog+IC&start_year=2026&end_year=2026&max_records=30&format=json&apikey={IEEE_API_KEY}",
+      "category": "academic",
+      "language": "en",
+      "type": "api",
+      "enabled": true,
+      "note": "API Key 已配置。{IEEE_API_KEY} 占位符在运行时由环境变量自动替换"
+    }
+  ],
+  "categories": {
+    "manufacturing": {"label": "制造与工艺", "priority": 1},
+    "digital": {"label": "芯片设计·数字与架构", "priority": 2},
+    "analog": {"label": "芯片设计·模拟与混合信号", "priority": 3},
+    "rf": {"label": "芯片设计·射频与微波", "priority": 4},
+    "eda": {"label": "芯片设计·EDA工具链", "priority": 5},
+    "memory": {"label": "存储", "priority": 6},
+    "equipment": {"label": "设备与材料", "priority": 7},
+    "supply_chain": {"label": "供应链与产业链", "priority": 8},
+    "industry": {"label": "行业动态与政策", "priority": 9},
+    "academic": {"label": "学术论文", "priority": 10}
+  },
+  "fetch_settings": {
+    "request_delay_seconds": 1.5,
+    "user_agent": "SemiconductorNewsBot/1.0 (+https://github.com/semiconductor-news-bot)",
+    "timeout_seconds": 30,
+    "max_retries": 2,
+    "lookback_days": 7
+  }
+}

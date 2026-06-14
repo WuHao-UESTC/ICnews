@@ -1,0 +1,62 @@
+name: 半导体行业周报
+
+on:
+  schedule:
+    # 每周一 UTC 00:00（北京时间 08:00）运行
+    - cron: "0 0 * * 1"
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: "Dry run (不调用 LLM / 不发布)"
+        type: boolean
+        default: false
+      min_importance:
+        description: "最低重要度"
+        type: choice
+        options:
+          - low
+          - medium
+          - high
+        default: "low"
+
+permissions:
+  contents: write
+
+jobs:
+  generate-report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout 仓库
+        uses: actions/checkout@v4
+
+      - name: 安装 Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: 安装依赖
+        run: pip install -r requirements.txt
+
+      - name: 生成周报
+        env:
+          NOTION_TOKEN: ${{ secrets.NOTION_TOKEN }}
+          NOTION_PARENT_PAGE_ID: ${{ secrets.NOTION_PARENT_PAGE_ID }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          DEEPSEEK_BASE_URL: ${{ secrets.DEEPSEEK_BASE_URL }}
+          IEEE_API_KEY: ${{ secrets.IEEE_API_KEY }}
+        run: |
+          python -m src.main --min-importance low
+
+      - name: 提交处理记录
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add .github/cache/processed_urls.json
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: 更新周报处理记录 [skip ci]"
+            git push
+          else
+            echo "处理记录无变化，跳过提交"
+          fi
